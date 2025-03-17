@@ -38,6 +38,7 @@ class EZDiffusionSimulator:
         return a_est, v_est, t_est
     
     def calculate_bias(self,n):
+        #calculate bias 1000 times by averaging variables across each iteration
         b = []
         b_est = []
         for i in range(1000):
@@ -47,10 +48,11 @@ class EZDiffusionSimulator:
             b.append(tuple([a,v,t]))
             b_est.append(predicted)
         b = (np.mean(b, axis = 0) - np.mean(b_est, axis = 0))
-        b_squared = b**2
+        b_squared = b**2 #squared bias
         return b,b_squared
             
 if __name__ == "__main.sh__":
+    #run simulator using given n values
     simulator = EZDiffusionSimulator()
     n = [10,40,4000]
     for n in n:
